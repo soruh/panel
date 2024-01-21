@@ -172,12 +172,13 @@
           buildInputs = [];
 
           buildPhase = ''
+            export NODE_OPTIONS=--openssl-legacy-provider
             yarn run build:production
           '';
 
           installPhase = ''
             mkdir -p $out
-            cp -r public/build $out
+            cp -r public $out
           '';
         };
 
@@ -193,8 +194,8 @@
             chmod 755 $out
             chmod 755 $out/public
 
-            mkdir -p $out/public/build
-            cp -r ${ui}/build/* $out/public/build
+            mkdir -p $out/public
+            cp -r ${ui}/* $out/public/
 
             rm $out/composer.json.orig
           '';
